@@ -41,9 +41,13 @@ st.title("💰 家計管理アプリ")
 if not is_authenticated:
     st.warning("まずZaimと連携してください。")
     if st.button("Zaimで認証する"):
-        auth_url = zaim_client.get_authorization_url()
-        st.markdown(f"[こちらをクリックしてZaimで認証]({auth_url})", unsafe_allow_html=False)
-        st.info("認証後、このページに自動的に戻ります。")
+        with st.spinner("認証URLを準備中..."):
+            auth_url = zaim_client.get_authorization_url()
+        st.markdown(
+            f'<a href="{auth_url}" target="_self" style="font-size:16px; font-weight:bold;">→ こちらをクリックしてZaimで認証する</a>',
+            unsafe_allow_html=True,
+        )
+        st.info("上のリンクをクリックするとZaimの認証ページへ移動します。認証後、自動的にこのページへ戻ります。")
     st.stop()
 
 # ─── サイドバー: 期間選択 ──────────────────────────────────────────────────

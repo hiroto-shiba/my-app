@@ -55,7 +55,7 @@ def fetch_access_token(
         resource_owner_secret=resource_owner_secret,
         verifier=oauth_verifier,
     )
-    tokens = oauth.fetch_access_token(ACCESS_TOKEN_URL)
+    tokens = oauth.fetch_access_token(ACCESS_TOKEN_URL, timeout=15)
     with open(TOKEN_FILE, "w") as f:
         json.dump(tokens, f)
     return tokens
